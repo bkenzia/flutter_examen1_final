@@ -13,12 +13,17 @@ class DepartementPage extends StatelessWidget {
   final Config config;
   final String title;
   late String code;
+
   String getCodeRegion(title) {
     String region = title.split(':')[1];
     code = config.get('regions.$region.code');
     print("le code est : $code");
 
     return code;
+  }
+
+  String getRegion(title) {
+    return title.split(':')[1];
   }
 
   @override
@@ -38,14 +43,11 @@ class DepartementPage extends StatelessWidget {
       drawer: SlideMenu(
           config: config, currentPage: config.get('page-name.regions')),
       body: Center(
-          child: Column(
-        children: [
-          Text("text"),
-          Container(
-            child: departementLister(code: getCodeRegion(title)),
-          ),
-        ],
-      )),
+        child: DepartementLister(
+            code: getCodeRegion(title),
+            region: getRegion(title),
+            config: config),
+      ),
     );
   }
 }
