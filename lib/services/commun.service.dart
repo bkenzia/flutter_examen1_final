@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter_examen1/models/communs.model.dart';
-import 'package:flutter_examen1/models/departement.model.dart';
 import 'package:http/http.dart' as http;
 
 class CommunService {

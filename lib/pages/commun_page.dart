@@ -1,26 +1,18 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_examen1/components/communLister.dart';
-import 'package:flutter_examen1/components/config.dart';
-import 'package:flutter_examen1/components/departementLister.dart';
-import 'package:flutter_examen1/components/sliding_menu.dart';
+import 'package:flutter_examen1/models/departement.model.dart';
 
 class CommunPage extends StatelessWidget {
   CommunPage({
     super.key,
-    required this.config,
+    required this.departement,
     required this.title,
   });
 
-  final Config config;
   final String title;
-  late String code;
-  String getCodeRegion(title) {
-    String region = title.split(':')[1];
-    code = config.get('regions.$region.code');
-    print("le code est : $code");
-
-    return code;
-  }
+  late Departement departement;
 
   @override
   Widget build(BuildContext context) {
@@ -36,17 +28,11 @@ class CommunPage extends StatelessWidget {
           ),
         ),
       ),
-      drawer: SlideMenu(
-          config: config, currentPage: config.get('page-name.regions')),
       body: Center(
-          child: Column(
-        children: [
-          Text("text"),
-          Container(
-            child: CommunLister(code: getCodeRegion(title)),
-          ),
-        ],
-      )),
+        child: CommunLister(
+            codeDepartement: departement.code,
+            nameDepartement: departement.nom),
+      ),
     );
   }
 }
